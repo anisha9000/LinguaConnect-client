@@ -24,6 +24,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -34,6 +35,7 @@ import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -95,6 +97,10 @@ public class EditProfile extends AppCompatActivity {
         etCompany.setText(Utility.getLocalString(this,Constants.USER_COMPANY));
         etDesignation.setText(Utility.getLocalString(this,Constants.USER_DESIGNATION));
         etLocation.setText(Utility.getLocalString(this,Constants.USER_LOCATION));
+
+        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+        imageLoader.get(Utility.getLocalString(this, Constants.USER_PICTURE_URL),
+                ImageLoader.getImageListener(accountImage,R.mipmap.profile,R.mipmap.profile), 200, 200);
 
     }
 
@@ -362,29 +368,49 @@ public class EditProfile extends AppCompatActivity {
                     Log.e(TAG,"Adding profile image");
                     File uploadingFile = new File(currentPhotoPath);
 
+                /*ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                Bitmap bmp = Utility.decodeFile(uploadingFile);
+                if(bmp != null) {
+                    bmp.compress(Bitmap.CompressFormat.JPEG, 90 , bos);
+                    ContentBody foto = new ByteArrayBody(bos.toByteArray(), "fileselfie.jpg");
+                    reqEntity.addPart(Constants.KEY_SELFIE_FILE, foto);
+                    bmp.recycle();
+                }*/
+
                 Log.e(TAG,"size:"+uploadingFile.length());
-                    multipart.addFilePart("profilePicFile", uploadingFile);
+                    multipart.addFilePart("picture", uploadingFile);
                 List<String> response = multipart.finish();
 
                 Log.e(TAG,"SERVER REPLIED:");
 
                 int status = 0;
                 Log.e(TAG, "Response size : " + response.size());
+                String imageUrl = null;
+                String statusDisplaying = null;
                 for (String line : response) {
 
                     Log.e(TAG, line);
                     JSONObject uploadPhoto = new JSONObject(line);
-                    String statusDisplaying = uploadPhoto.getString("status");
-                    Log.e("status displaying", "" + statusDisplaying);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(progress != null)
-                            progress.hideProgressBar();
-                        }
-                    });
-
+                    statusDisplaying = uploadPhoto.getString("message");
+                    imageUrl = uploadPhoto.optString("url");
+                    Log.e(TAG,statusDisplaying+","+imageUrl);
                 }
+
+                Utility.saveLocalString(EditProfile.this,Constants.USER_PICTURE_URL, imageUrl);
+                Log.e(TAG,"imageUrl:"+imageUrl);
+                final String finalStatusDisplaying = statusDisplaying;
+                final String finalImageUrl = imageUrl;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(progress != null)
+                            progress.hideProgressBar();
+                        Utility.showToast(EditProfile.this, finalStatusDisplaying);
+                        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+                        imageLoader.get(finalImageUrl,
+                                ImageLoader.getImageListener(accountImage,R.mipmap.profile,R.mipmap.profile), 200, 200);
+                    }
+                });
             } catch (IOException ex) {
                 Log.e(TAG, "IOException in uploading : " + ex.toString());
                 ex.printStackTrace();

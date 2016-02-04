@@ -20,7 +20,7 @@ public class Constants {
     public static String USER_RATING = "userRating";
 
     public static String BASE_URL = "http://ec2-52-71-92-147.compute-1.amazonaws.com/lingua/";
-    
+
     //public static String BASE_URL = "http://ec2-52-90-237-213.compute-1.amazonaws.com/lingua/";
     public static String REGISTER_URL = "register/";
     public static String LOGIN_URL = "login/";

@@ -96,9 +96,10 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject responseString = null;
                     if (error != null) {
                         responseString = new JSONObject(error.getMessage());
+                        Utility.showToast(LoginActivity.this, responseString.optString("error"));
                     }
-                    Log.e(TAG,"");
-                    Utility.showToast(LoginActivity.this, responseString.optString("error"));
+                    Log.e(TAG,"volleyError:"+volleyError);
+
                 } catch (JSONException e) {
                     Log.e(TAG,"Exception:"+e);
                     e.printStackTrace();

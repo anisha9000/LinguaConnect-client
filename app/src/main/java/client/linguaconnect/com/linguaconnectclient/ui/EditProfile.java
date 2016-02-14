@@ -88,11 +88,11 @@ public class EditProfile extends AppCompatActivity {
         if(Utility.getLocalString(this,Constants.USER_GENDER).equalsIgnoreCase("male")) {
             Log.e(TAG,"rbMale selected");
             rgGender.clearCheck();
-            rbMale.setSelected(true);
+            rbMale.setChecked(true);
         } else if(Utility.getLocalString(this,Constants.USER_GENDER).equalsIgnoreCase("female")) {
             Log.e(TAG,"rbfemale selected");
             rgGender.clearCheck();
-            rbFemale.setSelected(true);
+            rbFemale.setChecked(true);
         }
         etCompany.setText(Utility.getLocalString(this,Constants.USER_COMPANY));
         etDesignation.setText(Utility.getLocalString(this,Constants.USER_DESIGNATION));

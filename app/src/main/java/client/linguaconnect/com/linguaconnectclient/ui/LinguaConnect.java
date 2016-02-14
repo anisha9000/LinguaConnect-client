@@ -96,10 +96,7 @@ public class LinguaConnect extends AppCompatActivity implements fragmentDrawer.F
                 Utility.saveLocalString(LinguaConnect.this, Constants.currentEvent, event);
                 updateUi();
             }
-
-
         }
-
     }
 
     @Override

@@ -90,12 +90,6 @@ public class MyGcmListenerService extends GcmListenerService {
     public void onMessageReceived(String from, Bundle dataBundle) {
         Log.e(TAG, "onMessageReceived called");
         Log.e(TAG, "from = " + from);
-        Calendar c = Calendar.getInstance();
-        int mins = c.get(Calendar.MINUTE);
-        int hrs = c.get(Calendar.HOUR_OF_DAY);
-        int dt = c.get(Calendar.DATE);
-        SimpleDateFormat month_date = new SimpleDateFormat("MMM");
-        String month_name = month_date.format(c.getTime());
 
         if (dataBundle == null) return;
         try {
@@ -117,6 +111,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
             Intent BroadcastIntent = new Intent(BROADCAST_ACTION);
             BroadcastIntent.putExtra("event", event);
+            BroadcastIntent.putExtra("booking_id",data.optString("booking_id"));
             Log.e(TAG,"send broadcast");
             this.sendBroadcast(BroadcastIntent);
 

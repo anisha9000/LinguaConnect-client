@@ -87,12 +87,12 @@ public class EditProfile extends AppCompatActivity {
         etAge.setText(String.valueOf(Utility.getLocalInt(this,Constants.USER_AGE)));
         if(Utility.getLocalString(this,Constants.USER_GENDER).equalsIgnoreCase("male")) {
             Log.e(TAG,"rbMale selected");
+            rgGender.clearCheck();
             rbMale.setSelected(true);
-            rbFemale.setSelected(false);
         } else if(Utility.getLocalString(this,Constants.USER_GENDER).equalsIgnoreCase("female")) {
             Log.e(TAG,"rbfemale selected");
+            rgGender.clearCheck();
             rbFemale.setSelected(true);
-            rbMale.setSelected(false);
         }
         etCompany.setText(Utility.getLocalString(this,Constants.USER_COMPANY));
         etDesignation.setText(Utility.getLocalString(this,Constants.USER_DESIGNATION));

@@ -100,6 +100,7 @@ public class interpreterAdapter extends RecyclerView.Adapter<interpreterAdapter.
                         Log.e(TAG,"response:"+response);
                         Utility.showToast(activity, response.optString("message"));
                         activity.startActivity(new Intent(activity,LinguaConnect.class));
+                        activity.finish();
                     }
                 }, new Response.ErrorListener() {
 

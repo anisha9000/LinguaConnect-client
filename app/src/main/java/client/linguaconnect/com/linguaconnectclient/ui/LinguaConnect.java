@@ -102,6 +102,14 @@ public class LinguaConnect extends AppCompatActivity implements fragmentDrawer.F
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (drawerFragment != null) {
+            drawerFragment.setProfilePic();
+        }
+    }
+
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

@@ -130,7 +130,7 @@ public class fragmentDrawer extends Fragment{
                     case SHARE:
                         Intent shareIntent = new Intent();
                         shareIntent.setAction(Intent.ACTION_SEND);
-                        shareIntent.putExtra(Intent.EXTRA_TEXT, "Hey! You can easily find interpreters via LinguaConnect. Try it:");
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, "Hey! You can easily find interpreters via LinguaConnect. Try it: https://play.google.com/store/apps/details?id=client.linguaconnect.com.linguaconnectclient");
 
                         shareIntent.setType("text/plain");
                         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -317,9 +317,14 @@ public class fragmentDrawer extends Fragment{
     public void setProfilePic() {
         String profilePicUrl = Utility.getLocalString(getActivity(), Constants.USER_PICTURE_URL);
         Log.e(TAG,"avtar pic in drawer : "+profilePicUrl);
-        ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-        imageLoader.get(profilePicUrl,
-                ImageLoader.getImageListener(profileImage,R.mipmap.profile,R.mipmap.profile));
+        try {
+            ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+            imageLoader.get(profilePicUrl,
+                    ImageLoader.getImageListener(profileImage,R.mipmap.profile,R.mipmap.profile));
+        } catch (Exception e) {
+            Log.e(TAG,"error setting picture. Set default picture.");
+        }
+
     }
 
 }

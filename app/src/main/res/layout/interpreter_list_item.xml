@@ -4,12 +4,15 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
         android:id="@+id/interpreter_image"
         android:src="@mipmap/profile"
         android:layout_alignTop="@+id/interpreter_info"
-        android:layout_alignBottom="@+id/interpreter_info" />
+        android:layout_alignBottom="@+id/interpreter_info"
+        android:adjustViewBounds="true"
+        android:padding="15dp"
+        android:scaleType="fitXY"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

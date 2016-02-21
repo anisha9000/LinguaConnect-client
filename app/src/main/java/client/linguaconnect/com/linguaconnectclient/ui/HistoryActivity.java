@@ -84,8 +84,9 @@ public class HistoryActivity extends AppCompatActivity {
                                             historyObject.optString(getString(R.string.language)),
                                             historyObject.optString(getString(R.string.duration)),
                                             historyObject.optString(getString(R.string.interpreter_picture_url)),
-                                            historyObject.optInt(getString(R.string.rating)),
-                                            historyObject.optString("status")
+                                            historyObject.optInt(getString(R.string.interpreter_rating)),
+                                            historyObject.optString(getString(R.string.status)),
+                                            historyObject.optString(getString(R.string.booking_time))
                                     ));
 
                                     mAdapter = new HistoryAdapter(responseList, HistoryActivity.this);

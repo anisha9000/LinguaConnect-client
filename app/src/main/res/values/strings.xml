@@ -39,6 +39,9 @@
     <string name="picture_url">picture_url</string>
     <string name="location">location</string>
     <string name="rating">rating</string>
+    <string name="interpreter_rating">interpreter_rating</string>
+    <string name="status">status</string>
+    <string name="booking_time">booking_time</string>
     <string name="nationality">nationality</string>
     <string name="client_email">client_email</string>
     <string name="interpreter_email">interpreter_email</string>

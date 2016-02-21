@@ -5,10 +5,10 @@ package client.linguaconnect.com.linguaconnectclient.ui.adapter;
  */
 public class HistoryItem {
     int rating;
-    String pictureUrl, firstName, lastName, language, duration, status;
+    String pictureUrl, firstName, lastName, language, duration, status, bookingTime;
 
     public HistoryItem(String firstName, String lastName, String language, String duration,
-                       String pictureUrl, int rating, String status) {
+                       String pictureUrl, int rating, String status, String bookingTime) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.language = language;
@@ -16,6 +16,7 @@ public class HistoryItem {
         this.pictureUrl = pictureUrl;
         this.rating = rating;
         this.status = status;
+        this.bookingTime = bookingTime;
     }
 
     public String getName() {
@@ -40,5 +41,9 @@ public class HistoryItem {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getBookingTime() {
+        return bookingTime;
     }
 }

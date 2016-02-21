@@ -74,7 +74,7 @@ public class interpreterAdapter extends RecyclerView.Adapter<interpreterAdapter.
 
     void setRating(ViewHolder holder,int rating){
         for(int i=1;i<=5;i++) {
-            if(i<rating) {
+            if(i<=rating) {
                 holder.stars[i-1].setImageResource(R.mipmap.ic_star_black);
             } else if (i > rating) {
                 holder.stars[i-1].setImageResource(R.mipmap.ic_star_border_black);

@@ -49,6 +49,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
                 ImageLoader.getImageListener(holder.ivInterpreterImage,R.mipmap.profile,R.mipmap.profile));
 
         setRating(holder, historyDetail.getRating());
+        holder.tvBookingTime.setText(historyDetail.getBookingTime());
 
     }
 
@@ -59,7 +60,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder  {
 
-        TextView tvName, tvLanguage, tvDuration, tvStatus;
+        TextView tvName, tvLanguage, tvDuration, tvStatus, tvBookingTime;
         ImageView ivInterpreterImage;
         ImageView[] stars;
 
@@ -77,6 +78,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             stars[2]=(ImageView)itemView.findViewById(R.id.rate3);
             stars[3]=(ImageView)itemView.findViewById(R.id.rate4);
             stars[4]=(ImageView)itemView.findViewById(R.id.rate5);
+            tvBookingTime = (TextView) itemView.findViewById(R.id.booking_time);
         }
     }
 
@@ -87,7 +89,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     void setRating(ViewHolder holder,int rating){
         for(int i=1;i<=5;i++) {
-            if(i<rating) {
+            if(i<=rating) {
                 holder.stars[i-1].setImageResource(R.mipmap.ic_star_black);
             } else if (i > rating) {
                 holder.stars[i-1].setImageResource(R.mipmap.ic_star_border_black);
